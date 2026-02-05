@@ -8,9 +8,8 @@ public class Player : MonoBehaviour
     private float speed = 5f;
     private Vector3 movement;
 
-    private float jumpDuration = 0.25f;
-    private bool isJumping = false;
     public bool isSliding = false;
+    private PlayerJump playerJump;
 
     private Vector3Int lastCellPos;
     private bool tileChangeLocked = false;
@@ -31,8 +30,9 @@ public class Player : MonoBehaviour
     void Awake()
     {
         col = GetComponent<Collider2D>();
+        playerJump = GetComponent<PlayerJump>();
     } 
-    // Update is called once per frame
+
     void Update()
     {
         Vector3 feetPosition = new Vector3(
@@ -46,8 +46,7 @@ public class Player : MonoBehaviour
         
         if (groundUnderPlayer != null) isSliding = false;
 
-        if (isJumping) return;
-
+        if (playerJump.IsJumping) return;
         if (isSliding) return;
 
         float x = Input.GetAxisRaw("Horizontal");
@@ -67,35 +66,16 @@ public class Player : MonoBehaviour
         {
             isSliding = false;    
         }
-
         
         Vector3Int playerPlatformCellPosition = platformTilemap.WorldToCell(transform.position);
         TileBase platformUnderPlayer = platformTilemap.GetTile(playerPlatformCellPosition);
 
         if (groundUnderPlayer != null || platformUnderPlayer != null)
         {
-            // Detect two tiles ahead
-            Vector3Int dir = Vector3Int.zero;
-
-            if (Input.GetKeyDown(KeyCode.W)) dir = Vector3Int.up;
-            else if (Input.GetKeyDown(KeyCode.S)) dir = Vector3Int.down;
-            else if (Input.GetKeyDown(KeyCode.A)) dir = Vector3Int.left;
-            else if (Input.GetKeyDown(KeyCode.D)) dir = Vector3Int.right;
-
-            if (dir == Vector3Int.zero) return;
-
-            Vector3Int middleCell = playerGroundCellPosition + dir;
-            Vector3Int targetCell = playerGroundCellPosition + dir * 2;
-
-            TileBase waterTile = waterTilemap.GetTile(middleCell);
-            TileBase platformTile = platformTilemap.GetTile(targetCell);
-            TileBase groundTile = groundTilemap.GetTile(targetCell);
-
-            if (waterTile != null && (platformTile != null || groundTile))
+            Vector3Int dir = GetDirectionInput();
+            if (dir != Vector3Int.zero)
             {
-                Vector3 targetPos = groundTilemap.GetCellCenterWorld(targetCell);
-                targetPos.z = 0;
-                StartCoroutine(JumpTo(targetPos));
+                CheckAndJumpTile(playerGroundCellPosition, dir);
             } 
         }
 
@@ -121,34 +101,37 @@ public class Player : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private Vector3Int GetDirectionInput()
     {
-        if (isJumping) return;
-
-        transform.position += movement * speed * Time.deltaTime;     
+        if (Input.GetKeyDown(KeyCode.W)) return Vector3Int.up;
+        if (Input.GetKeyDown(KeyCode.S)) return Vector3Int.down;
+        if (Input.GetKeyDown(KeyCode.A)) return Vector3Int.left;
+        if (Input.GetKeyDown(KeyCode.D)) return Vector3Int.right;
+        return Vector3Int.zero;
     }
 
-    IEnumerator JumpTo(Vector3 targetPos)
+    private void CheckAndJumpTile(Vector3Int currentCell, Vector3Int dir)
     {
-        isJumping = true;
+        Vector3Int middleCell = currentCell + dir;
+        Vector3Int targetCell = currentCell + dir * 2;
 
-        TilemapCollider2D tmc = waterTilemap.GetComponent<TilemapCollider2D>();
-        tmc.enabled = false;
+        TileBase waterTile = waterTilemap.GetTile(middleCell);
+        TileBase platformTile = platformTilemap.GetTile(targetCell);
+        TileBase groundTile = groundTilemap.GetTile(targetCell);
 
-        Vector3 start = transform.position;
-        float elapsed = 0f;
-
-        while (elapsed < jumpDuration)
+        if (waterTile != null && (platformTile != null || groundTile != null))
         {
-            elapsed += Time.deltaTime;
-            float t = elapsed / jumpDuration;
-            transform.position = Vector3.Lerp(start, targetPos, t);
-            yield return null;
+            Vector3 targetPos = groundTilemap.GetCellCenterWorld(targetCell);
+            targetPos.z = 0;
+            playerJump.JumpTo(targetPos);
         }
+    }
 
-        transform.position = targetPos;
-        isJumping = false;
-        tmc.enabled = true;
+    void FixedUpdate()
+    {
+        if (playerJump.IsJumping) return;
+
+        transform.position += movement * speed * Time.deltaTime;     
     }
 
     void OnCollisionEnter2D(Collision2D collision)
