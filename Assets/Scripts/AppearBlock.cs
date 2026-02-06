@@ -1,18 +1,24 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class AppearBlock : MonoBehaviour
 {
-    [SerializeField] Tilemap blockTilemap;
+    [SerializeField] private Tilemap blockTilemap; // Puede ser null
     private TilemapRenderer tmr;
 
     void Awake()
     {
-        tmr = blockTilemap.GetComponent<TilemapRenderer>();
+        if (blockTilemap != null)
+        {
+            tmr = blockTilemap.GetComponent<TilemapRenderer>();
+        }
     }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        tmr.enabled = true;
+        if (tmr != null)
+        {
+            tmr.enabled = true;
+        }
     }
 }

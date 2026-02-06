@@ -13,6 +13,12 @@ GameObject:
   - component: {fileID: 5755815204434578560}
   - component: {fileID: 6580557813187723169}
   - component: {fileID: 8596228898081147718}
+  - component: {fileID: 6032084164035999758}
+  - component: {fileID: 6364801399934439630}
+  - component: {fileID: 2654453304060790811}
+  - component: {fileID: 6282624772686867955}
+  - component: {fileID: 4396445677994830701}
+  - component: {fileID: 8117052318284275903}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -132,6 +138,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d860590420e804f89fc99f7069ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  isSliding: 0
+  groundTilemap: {fileID: 0}
+  waterTilemap: {fileID: 0}
+  platformTilemap: {fileID: 0}
+  iceSlipTilemap: {fileID: 0}
+  iceTileController: {fileID: 0}
+  iceSlideController: {fileID: 0}
 --- !u!61 &8596228898081147718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,3 +191,81 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5, y: 1.125}
   m_EdgeRadius: 0
+--- !u!114 &6032084164035999758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513132067847882728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabc527a3a1a0f04fbb797b1b97ee22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
+  jumpDuration: 0.25
+  waterTilemap: {fileID: 0}
+--- !u!114 &6364801399934439630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513132067847882728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99529c4f045aa334c987719df114c8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
+--- !u!114 &2654453304060790811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513132067847882728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabc527a3a1a0f04fbb797b1b97ee22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
+  jumpDuration: 0.25
+  waterTilemap: {fileID: 0}
+--- !u!114 &6282624772686867955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513132067847882728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0566e8714c226a348ad88ccfe2ad2bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AppearBlock
+  blockTilemap: {fileID: 0}
+--- !u!114 &4396445677994830701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513132067847882728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99529c4f045aa334c987719df114c8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
+--- !u!114 &8117052318284275903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513132067847882728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0566e8714c226a348ad88ccfe2ad2bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AppearBlock
+  blockTilemap: {fileID: 0}

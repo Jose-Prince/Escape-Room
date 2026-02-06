@@ -17,8 +17,6 @@ public class InteractableObject : MonoBehaviour
             canvas = c.gameObject;
         }
 
-        TextMeshProUGUI instructionMsg = instructionsDisplay.GetComponentInChildren<TextMeshProUGUI>(true);
-        instructionMsg.text = message;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,6 +26,9 @@ public class InteractableObject : MonoBehaviour
             playerInRange = true;
             canvas.SetActive(true);
         }
+        
+        TextMeshProUGUI instructionMsg = instructionsDisplay.GetComponentInChildren<TextMeshProUGUI>(true);
+        instructionMsg.text = message;
     }
 
     private void OnCollisionExit2D(Collision2D collision)

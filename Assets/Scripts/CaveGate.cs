@@ -12,10 +12,12 @@ public class CaveGate : MonoBehaviour
             if (place)
             {
                 SceneManager.LoadScene("Game");
+                PlayerPrefs.DeleteAll();
             }
             else
             {
                 SceneManager.LoadScene("End");                
+                PlayerPrefs.DeleteAll();
             }
         }
     }

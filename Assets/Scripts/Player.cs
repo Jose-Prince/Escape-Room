@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
     private Collider2D col;
     private CheckpointManager manager;
 
-    [SerializeField] LevelManager levelManager;
-
     [Header("Tilemaps")]
     [SerializeField] Tilemap groundTilemap;
     [SerializeField] Tilemap waterTilemap;
@@ -45,9 +43,15 @@ public class Player : MonoBehaviour
             0
         );
         
-        Vector3Int playerGroundCellPosition = groundTilemap.WorldToCell(feetPosition);
-        TileBase groundUnderPlayer = groundTilemap.GetTile(playerGroundCellPosition);
-        
+        TileBase groundUnderPlayer = null;
+        Vector3Int playerGroundCellPosition = Vector3Int.zero;
+
+        if (groundTilemap != null)
+        {
+            playerGroundCellPosition = groundTilemap.WorldToCell(feetPosition);
+            groundUnderPlayer = groundTilemap.GetTile(playerGroundCellPosition);
+        }
+
         if (groundUnderPlayer != null) isSliding = false;
 
         if (playerJump.IsJumping) return;
@@ -63,8 +67,13 @@ public class Player : MonoBehaviour
 
         isSliding = iceSlideController.isSliding(feetPosition, movement);
         
-        Vector3Int playerPlatformCellPosition = platformTilemap.WorldToCell(transform.position);
-        TileBase platformUnderPlayer = platformTilemap.GetTile(playerPlatformCellPosition);
+        TileBase platformUnderPlayer = null;
+
+        if (platformTilemap != null)
+        {
+            Vector3Int playerPlatformCellPosition = platformTilemap.WorldToCell(transform.position);
+            platformUnderPlayer = platformTilemap.GetTile(playerPlatformCellPosition);
+        }
 
         if (groundUnderPlayer != null || platformUnderPlayer != null)
         {
@@ -92,9 +101,18 @@ public class Player : MonoBehaviour
         Vector3Int middleCell = currentCell + dir;
         Vector3Int targetCell = currentCell + dir * 2;
 
-        TileBase waterTile = waterTilemap.GetTile(middleCell);
-        TileBase platformTile = platformTilemap.GetTile(targetCell);
-        TileBase groundTile = groundTilemap.GetTile(targetCell);
+        TileBase waterTile = null;
+        TileBase platformTile = null;
+        TileBase groundTile = null;
+
+        if (waterTilemap != null)
+            waterTile = waterTilemap.GetTile(middleCell);
+
+        if (platformTilemap != null)
+            platformTile = platformTilemap.GetTile(targetCell);
+
+        if (groundTilemap != null)
+            groundTile = groundTilemap.GetTile(targetCell);
 
         if (waterTile != null && (platformTile != null || groundTile != null))
         {

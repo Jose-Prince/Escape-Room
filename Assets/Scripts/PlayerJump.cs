@@ -17,21 +17,27 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     private IEnumerator JumpRoutine(Vector3 targetPos)
     {
         IsJumping = true;
 
-        TilemapCollider2D tmc = waterTilemap.GetComponent<TilemapCollider2D>();
-        if (tmc != null) tmc.enabled = false;
+        TilemapCollider2D tmc = null;
+
+        if (waterTilemap != null)
+        {
+            tmc = waterTilemap.GetComponent<TilemapCollider2D>();
+            if (tmc != null) tmc.enabled = false;
+        }
 
         Vector3 start = transform.position;
         float elapsed = 0f;
 
-        while (elapsed < jumpDuration)
+        float duration = Mathf.Max(0.01f, jumpDuration);
+
+        while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = elapsed / jumpDuration;
+            float t = elapsed / duration;
 
             transform.position = Vector3.Lerp(start, targetPos, t);
             yield return null;
@@ -40,6 +46,7 @@ public class PlayerJump : MonoBehaviour
         transform.position = targetPos;
         IsJumping = false;
 
-        if (tmc != null) tmc.enabled = true;
+        if (tmc != null)
+            tmc.enabled = true;
     }
 }

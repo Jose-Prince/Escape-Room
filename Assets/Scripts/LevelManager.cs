@@ -64,7 +64,7 @@ public class LevelManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        Time.timeScale = 1f;
+        ContinueTime();
         IsPaused = false;
         pauseBackground.SetActive(false);
     }
@@ -95,5 +95,10 @@ public class LevelManager : MonoBehaviour
     {
         tilesChanged = 0;
         iceTileController.ResetIceTiles();
+    }
+
+    public void ContinueTime()
+    {
+        Time.timeScale = 1f;
     }
 }
