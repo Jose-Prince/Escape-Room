@@ -3,17 +3,16 @@ using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
-
+    private Vector4 lastMoveDir = Vector3.zero;
+    private float snapBackOffset = 0.15f;
     private float speed = 5f;
     private Vector3 movement;
 
     public bool isSliding = false;
     private PlayerJump playerJump;
 
-    private Vector3Int lastCellPos;
-    private bool tileChangeLocked = false;
-
     private Collider2D col;
+    private CheckpointManager manager;
 
     [SerializeField] LevelManager levelManager;
 
@@ -21,10 +20,10 @@ public class Player : MonoBehaviour
     [SerializeField] Tilemap groundTilemap;
     [SerializeField] Tilemap waterTilemap;
     [SerializeField] Tilemap platformTilemap;
-    [SerializeField] Tilemap iceTilemap;
-    [SerializeField] Tile iceTile;
-    [SerializeField] Tile snowTile;
     [SerializeField] Tilemap iceSlipTilemap;
+
+    [SerializeField] IceTileController iceTileController;
+    [SerializeField] IceSlideController iceSlideController;
 
     void Awake()
     {
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        CheckpointManager manager = FindFirstObjectByType<CheckpointManager>();
+        manager = FindFirstObjectByType<CheckpointManager>();
         transform.position = manager.GetCheckpointPosition();
     }
 
@@ -58,19 +57,11 @@ public class Player : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
 
         movement = new Vector3(x, y, 0).normalized;
-        
-        Vector3Int playerIceCellPosition = iceSlipTilemap.WorldToCell(feetPosition);
-        TileBase iceUnderPlayer = iceSlipTilemap.GetTile(playerIceCellPosition);
 
+        if (movement != Vector3.zero)
+            lastMoveDir = movement;
 
-        if (iceUnderPlayer != null && (x != 0 || y != 0))
-        {
-            isSliding = true;
-        } 
-        else
-        {
-            isSliding = false;    
-        }
+        isSliding = iceSlideController.isSliding(feetPosition, movement);
         
         Vector3Int playerPlatformCellPosition = platformTilemap.WorldToCell(transform.position);
         TileBase platformUnderPlayer = platformTilemap.GetTile(playerPlatformCellPosition);
@@ -84,26 +75,7 @@ public class Player : MonoBehaviour
             } 
         }
 
-        Vector3Int cellPos = iceTilemap.WorldToCell(feetPosition);
-
-        if (cellPos == lastCellPos) return;
-        lastCellPos = cellPos;
-
-        TileBase currentTile = iceTilemap.GetTile(cellPos);
-
-        if (currentTile == snowTile)
-        {
-            tileChangeLocked = true;
-            return;
-        }
-
-        if (tileChangeLocked) return;
-
-        if (currentTile == iceTile)
-        {
-            iceTilemap.SetTile(cellPos, snowTile);
-            levelManager.UpdateTilesChanged();
-        }
+        iceTileController.HandlePlayerStep(feetPosition);
     }
 
     private Vector3Int GetDirectionInput()
@@ -143,13 +115,13 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            
+            transform.position = manager.GetCheckpointPosition();
         }     
 
         if (collision.gameObject.CompareTag("Wall"))
         {
             isSliding = false;
-            //SnapToTileCenter(iceSlipTilemap);
+            SnapToTileCenter(iceSlipTilemap);
         }
     }
 
@@ -162,30 +134,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ResetIceTiles()
-    {
-        BoundsInt bounds = iceTilemap.cellBounds;
-
-        foreach (Vector3Int pos in bounds.allPositionsWithin)
-        {
-            TileBase tile = iceTilemap.GetTile(pos);
-
-            if (tile == snowTile)
-            {
-                iceTilemap.SetTile(pos, iceTile);
-            }
-        }
-
-        tileChangeLocked = false;
-        lastCellPos = Vector3Int.zero;
-    }
-
     void SnapToTileCenter(Tilemap tilemap)
     {
         Vector3Int cellPos = tilemap.WorldToCell(transform.position);
         Vector3 centerPos = tilemap.GetCellCenterWorld(cellPos);
+        
         centerPos.z = transform.position.z;
-        centerPos.y -= 0.2f;
-        transform.position = centerPos;
+
+        Vector3 offset = -lastMoveDir * snapBackOffset;
+
+        transform.position = centerPos + offset;
     }
 }

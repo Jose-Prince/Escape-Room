@@ -9455,6 +9455,14 @@ PrefabInstance:
       propertyPath: wallLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 6580557813187723169, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
+      propertyPath: iceTileController
+      value: 
+      objectReference: {fileID: 1514686592}
+    - target: {fileID: 6580557813187723169, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
+      propertyPath: iceSlideController
+      value: 
+      objectReference: {fileID: 1138368007}
     - target: {fileID: 8076467142309339435, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.42
@@ -10521,8 +10529,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   blockTilemap: {fileID: 1481176180}
-  player: {fileID: 1629147817}
+  iceTileController: {fileID: 0}
   pauseBackground: {fileID: 1968749669}
+--- !u!1 &1138368006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1138368008}
+  - component: {fileID: 1138368007}
+  m_Layer: 0
+  m_Name: IceSlideManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1138368007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138368006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4ce012979251e4bb5fbf8d51b35365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IceSlideController
+  iceSlipTilemap: {fileID: 622810243}
+--- !u!4 &1138368008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138368006}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.606852, y: 91.24281, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1159788223
 GameObject:
   m_ObjectHideFlags: 0
@@ -11542,6 +11595,54 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1514686591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1514686593}
+  - component: {fileID: 1514686592}
+  m_Layer: 0
+  m_Name: IceTileManagaer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1514686592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514686591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f416e5387906f9248928f3419e671695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IceTileController
+  iceTilemap: {fileID: 683717676}
+  iceTile: {fileID: 11400000, guid: 2299066d31968aa4bb2dd26c9f3811fb, type: 2}
+  snowTile: {fileID: 11400000, guid: c9bdc62911542434e89fecf66357c1a7, type: 2}
+  levelManager: {fileID: 1135623545}
+--- !u!4 &1514686593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514686591}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.606852, y: 91.24281, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1516300700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12034,17 +12135,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8076467142309339435, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
   m_PrefabInstance: {fileID: 786376833}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1629147817 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6580557813187723169, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
-  m_PrefabInstance: {fileID: 786376833}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 946378726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35d860590420e804f89fc99f7069ee3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!114 &1629147821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12083,7 +12173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0566e8714c226a348ad88ccfe2ad2bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppearBlock
-  blockTilemap: {fileID: 0}
+  blockTilemap: {fileID: 1481176180}
 --- !u!1001 &1786952421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12092,6 +12182,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 874336650542853190, guid: 60619888b8cbf2140844d9a6d066e11f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 946378726}
     - target: {fileID: 3689520780291231813, guid: 60619888b8cbf2140844d9a6d066e11f, type: 3}
       propertyPath: m_Name
       value: Sign (4)
@@ -25348,6 +25442,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 874336650542853190, guid: 60619888b8cbf2140844d9a6d066e11f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 946378726}
     - target: {fileID: 3689520780291231813, guid: 60619888b8cbf2140844d9a6d066e11f, type: 3}
       propertyPath: m_Name
       value: Sign (2)
@@ -25970,6 +26068,8 @@ SceneRoots:
   - {fileID: 109405282}
   - {fileID: 1041350659}
   - {fileID: 1622934322}
+  - {fileID: 1138368008}
+  - {fileID: 1514686593}
   - {fileID: 250711732}
   - {fileID: 1889945512}
   - {fileID: 268728470}

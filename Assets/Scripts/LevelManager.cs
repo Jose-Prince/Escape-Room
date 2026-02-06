@@ -5,7 +5,7 @@ public class LevelManager : MonoBehaviour
 {
 
     [SerializeField] Tilemap blockTilemap;
-    [SerializeField] Player player;
+    [SerializeField] IceTileController iceTileController;
     [SerializeField] GameObject pauseBackground;
 
     private bool IsPaused = false;
@@ -94,6 +94,6 @@ public class LevelManager : MonoBehaviour
     void ResetTilesPuzzle()
     {
         tilesChanged = 0;
-        player.ResetIceTiles();
+        iceTileController.ResetIceTiles();
     }
 }
