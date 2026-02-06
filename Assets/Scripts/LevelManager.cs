@@ -6,9 +6,6 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] Tilemap blockTilemap;
     [SerializeField] IceTileController iceTileController;
-    [SerializeField] GameObject pauseBackground;
-
-    private bool IsPaused = false;
 
     private int rocksPlaced = 0;
     private int tilesChanged = 0;
@@ -22,7 +19,6 @@ public class LevelManager : MonoBehaviour
         tmc = blockTilemap.GetComponent<TilemapCollider2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (rocksPlaced == 4)
@@ -43,30 +39,6 @@ public class LevelManager : MonoBehaviour
         {
             ResetTilesPuzzle();
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && !IsPaused)
-        {
-            PauseGame();
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && IsPaused)
-        {
-            ResumeGame();
-        }
-    }
-
-    public void PauseGame()
-    {
-        Time.timeScale = 0f;
-        IsPaused = true;
-        pauseBackground.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-    public void ResumeGame()
-    {
-        ContinueTime();
-        IsPaused = false;
-        pauseBackground.SetActive(false);
     }
 
     public void UpdateRocks()
