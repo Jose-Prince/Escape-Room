@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -31,7 +30,13 @@ public class Player : MonoBehaviour
     {
         col = GetComponent<Collider2D>();
         playerJump = GetComponent<PlayerJump>();
-    } 
+    }
+
+    void Start()
+    {
+        CheckpointManager manager = FindFirstObjectByType<CheckpointManager>();
+        transform.position = manager.GetCheckpointPosition();
+    }
 
     void Update()
     {
@@ -138,13 +143,22 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            transform.position = new Vector3(-1, -2, 0);
+            
         }     
 
         if (collision.gameObject.CompareTag("Wall"))
         {
             isSliding = false;
-            SnapToTileCenter(iceSlipTilemap);
+            //SnapToTileCenter(iceSlipTilemap);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Checkpoint"))
+        {
+            CheckpointManager manager = FindFirstObjectByType<CheckpointManager>();
+            manager.SetCheckpoint(collision.transform.position);
         }
     }
 

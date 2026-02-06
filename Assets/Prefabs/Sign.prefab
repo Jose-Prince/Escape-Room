@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05273964dd88e04b8bcffd3245c81f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  instructionsDisplay: {fileID: 0}
   message: Cruza al otro lado
 --- !u!114 &874336650542853190
 MonoBehaviour:

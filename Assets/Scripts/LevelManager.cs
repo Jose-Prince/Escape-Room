@@ -5,25 +5,21 @@ public class LevelManager : MonoBehaviour
 {
 
     [SerializeField] Tilemap blockTilemap;
-    [SerializeField] Tilemap block2Tilemap;
     [SerializeField] Player player;
+    [SerializeField] GameObject pauseBackground;
+
+    private bool IsPaused = false;
 
     private int rocksPlaced = 0;
     private int tilesChanged = 0;
 
     private TilemapCollider2D tmc;
     private TilemapRenderer tmr;
-    private TilemapCollider2D tmc2;
-    private TilemapRenderer tmr2;
 
     void Awake()
     {
         tmr = blockTilemap.GetComponent<TilemapRenderer>();
         tmc = blockTilemap.GetComponent<TilemapCollider2D>();
-
-        tmr2 = block2Tilemap.GetComponent<TilemapRenderer>();
-        tmc2 = block2Tilemap.GetComponent<TilemapCollider2D>();
-        
     }
 
     // Update is called once per frame
@@ -38,15 +34,39 @@ public class LevelManager : MonoBehaviour
 
         if (tilesChanged == 40)
         {
-            tmr2.enabled = false;
+            tmr.enabled = false;
 
-            tmc2.enabled = false;
+            tmc.enabled = false;
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             ResetTilesPuzzle();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !IsPaused)
+        {
+            PauseGame();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && IsPaused)
+        {
+            ResumeGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        IsPaused = true;
+        pauseBackground.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        IsPaused = false;
+        pauseBackground.SetActive(false);
     }
 
     public void UpdateRocks()
