@@ -10,7 +10,7 @@ public class Bat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement = new Vector3(dir, 0, 0).normalized;
+        movement = new Vector3(0, dir, 0).normalized;
     }
 
     void FixedUpdate()
