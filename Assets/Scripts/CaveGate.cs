@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class CaveGate : MonoBehaviour
 {
     [SerializeField] bool place;
+    [SerializeField] AudioClip triggerSound;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,8 +12,8 @@ public class CaveGate : MonoBehaviour
         {
             if (place)
             {
+                AudioManager.Instance.PlaySFX(triggerSound);
                 SceneManager.LoadScene("Game");
-                PlayerPrefs.DeleteAll();
             }
             else
             {
