@@ -10190,6 +10190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IceSlideController
   iceSlipTilemap: {fileID: 622810243}
+  slideClip: {fileID: 8300000, guid: d6de94600f99c9246abcada59edf5760, type: 3}
 --- !u!4 &1138368008
 Transform:
   m_ObjectHideFlags: 0
