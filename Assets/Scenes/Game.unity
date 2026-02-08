@@ -10988,6 +10988,7 @@ MonoBehaviour:
   iceTile: {fileID: 11400000, guid: 2299066d31968aa4bb2dd26c9f3811fb, type: 2}
   snowTile: {fileID: 11400000, guid: c9bdc62911542434e89fecf66357c1a7, type: 2}
   levelManager: {fileID: 1135623545}
+  iceClip: {fileID: 8300000, guid: 430adb579be099a4fa4a4b1850073180, type: 3}
 --- !u!4 &1514686593
 Transform:
   m_ObjectHideFlags: 0
