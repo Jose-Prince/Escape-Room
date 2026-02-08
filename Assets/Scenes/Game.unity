@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 39199218}
   - component: {fileID: 39199217}
   - component: {fileID: 39199216}
+  - component: {fileID: 39199221}
   m_Layer: 0
   m_Name: Rock (2)
   m_TagString: Untagged
@@ -394,6 +395,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &39199221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39199215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a435db671f99d34391525d21c71ff5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveRockSound
+  moveClip: {fileID: 8300000, guid: a32a686912c960342b87b7b71727edce, type: 3}
+  minDistanceToCountAsMove: 0.002
+  stopDelay: 0.15
 --- !u!1 &109405278
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +798,7 @@ GameObject:
   - component: {fileID: 315470790}
   - component: {fileID: 315470789}
   - component: {fileID: 315470788}
+  - component: {fileID: 315470793}
   m_Layer: 0
   m_Name: Rock (1)
   m_TagString: Untagged
@@ -949,6 +966,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &315470793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315470787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a435db671f99d34391525d21c71ff5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveRockSound
+  moveClip: {fileID: 8300000, guid: a32a686912c960342b87b7b71727edce, type: 3}
+  minDistanceToCountAsMove: 0.002
+  stopDelay: 0.15
 --- !u!1 &566134177
 GameObject:
   m_ObjectHideFlags: 0
@@ -9501,6 +9533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaveGate
   place: 0
+  triggerSound: {fileID: 0}
 --- !u!483693784 &833677955
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -11246,6 +11279,7 @@ GameObject:
   - component: {fileID: 1619932525}
   - component: {fileID: 1619932524}
   - component: {fileID: 1619932523}
+  - component: {fileID: 1619932528}
   m_Layer: 0
   m_Name: Rock (3)
   m_TagString: Untagged
@@ -11413,6 +11447,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1619932528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619932522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a435db671f99d34391525d21c71ff5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveRockSound
+  moveClip: {fileID: 8300000, guid: a32a686912c960342b87b7b71727edce, type: 3}
+  minDistanceToCountAsMove: 0.002
+  stopDelay: 0.15
 --- !u!4 &1629147815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8076467142309339435, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
@@ -24803,6 +24852,7 @@ GameObject:
   - component: {fileID: 1922763262}
   - component: {fileID: 1922763261}
   - component: {fileID: 1922763260}
+  - component: {fileID: 1922763265}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -24970,6 +25020,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922763265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922763259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a435db671f99d34391525d21c71ff5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveRockSound
+  moveClip: {fileID: 8300000, guid: a32a686912c960342b87b7b71727edce, type: 3}
+  minDistanceToCountAsMove: 0.002
+  stopDelay: 0.15
 --- !u!1001 &4443126396409901183
 PrefabInstance:
   m_ObjectHideFlags: 0
