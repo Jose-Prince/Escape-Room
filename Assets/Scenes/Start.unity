@@ -1922,7 +1922,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2034,7 +2034,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   sfxSource: {fileID: 1186172465}
-  loopSfxSource: {fileID: 1186172468}
 --- !u!82 &1186172468
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2048,7 +2047,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2165,6 +2164,7 @@ MonoBehaviour:
   iceTile: {fileID: 11400000, guid: 09d16fae0d6bf3d438f4de1f741f4aa3, type: 2}
   snowTile: {fileID: 11400000, guid: 09d16fae0d6bf3d438f4de1f741f4aa3, type: 2}
   levelManager: {fileID: 1513341721}
+  iceClip: {fileID: 0}
 --- !u!4 &1488854458
 Transform:
   m_ObjectHideFlags: 0
