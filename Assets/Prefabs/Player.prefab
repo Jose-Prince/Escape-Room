@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8076467142309339435}
   - component: {fileID: 7606556466483178512}
   - component: {fileID: 5755815204434578560}
-  - component: {fileID: 6580557813187723169}
   - component: {fileID: 8596228898081147718}
+  - component: {fileID: 6580557813187723169}
   - component: {fileID: 6032084164035999758}
   - component: {fileID: 6364801399934439630}
   - component: {fileID: 2654453304060790811}
@@ -126,25 +126,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6580557813187723169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513132067847882728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35d860590420e804f89fc99f7069ee3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
-  isSliding: 0
-  groundTilemap: {fileID: 0}
-  waterTilemap: {fileID: 0}
-  platformTilemap: {fileID: 0}
-  iceSlipTilemap: {fileID: 0}
-  iceTileController: {fileID: 0}
-  iceSlideController: {fileID: 0}
 --- !u!61 &8596228898081147718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -191,6 +172,27 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5, y: 1.125}
   m_EdgeRadius: 0
+--- !u!114 &6580557813187723169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5513132067847882728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d860590420e804f89fc99f7069ee3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  isSliding: 0
+  groundTilemap: {fileID: 0}
+  waterTilemap: {fileID: 0}
+  platformTilemap: {fileID: 0}
+  iceSlipTilemap: {fileID: 0}
+  iceTileController: {fileID: 0}
+  iceSlideController: {fileID: 0}
+  footstepClip: {fileID: 8300000, guid: ed2ad0f79e77f594399da069daf08f29, type: 3}
+  stepINterval: 0.4
 --- !u!114 &6032084164035999758
 MonoBehaviour:
   m_ObjectHideFlags: 0

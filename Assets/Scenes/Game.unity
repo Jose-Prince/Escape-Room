@@ -9311,6 +9311,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 2299066d31968aa4bb2dd26c9f3811fb, type: 2}
     - target: {fileID: 6580557813187723169, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1629147837}
+    - target: {fileID: 6580557813187723169, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
       propertyPath: snowTile
       value: 
       objectReference: {fileID: 11400000, guid: c162883c95969fc4a8d1f5d448c54d43, type: 2}
@@ -9419,6 +9423,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5513132067847882728, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1629147826}
+    - targetCorrespondingSourceObject: {fileID: 5513132067847882728, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1629147837}
   m_SourcePrefab: {fileID: 100100000, guid: 548a3c8b083917e4590ce944f96a3432, type: 3}
 --- !u!1001 &786916611
 PrefabInstance:
@@ -11508,6 +11515,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppearBlock
   blockTilemap: {fileID: 1481176180}
+--- !u!95 &1629147837
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946378726}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 35985aeb5dd76d548949c2332710f048, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1786952421
 PrefabInstance:
   m_ObjectHideFlags: 0

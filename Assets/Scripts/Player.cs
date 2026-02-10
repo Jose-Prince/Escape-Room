@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     [SerializeField] IceTileController iceTileController;
     [SerializeField] IceSlideController iceSlideController;
 
+    [Header("Footsteps")]
+    [SerializeField] private AudioClip footstepClip;
+    [SerializeField] private float stepINterval = 0.4f;
+
+    private float stepTimer = 0f;
+
     void Awake()
     {
         col = GetComponent<Collider2D>();
@@ -61,6 +67,23 @@ public class Player : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
 
         movement = new Vector3(x, y, 0).normalized;
+
+        bool isMoving = movement != Vector3.zero && !isSliding && !playerJump.IsJumping;
+
+        if (isMoving)
+        {
+            stepTimer -= Time.deltaTime;
+
+            if (stepTimer <= 0f)
+            {
+                AudioManager.Instance.PlaySFX(footstepClip);
+                stepTimer = stepINterval;
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+        }
 
         if (movement != Vector3.zero)
             lastMoveDir = movement;
@@ -162,5 +185,11 @@ public class Player : MonoBehaviour
         Vector3 offset = -lastMoveDir * snapBackOffset;
 
         transform.position = centerPos + offset;
+    }
+
+    public void PlayFootstep()
+    {
+        if (footstepClip != null)
+            AudioManager.Instance.PlaySFX(footstepClip);
     }
 }
