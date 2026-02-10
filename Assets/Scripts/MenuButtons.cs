@@ -9,6 +9,11 @@ public class MenuButtons : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void DeleteData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public void ExitGame()
     {
         #if UNITY_EDITOR
