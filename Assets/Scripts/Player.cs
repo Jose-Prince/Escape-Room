@@ -3,10 +3,12 @@ using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
-    private Vector4 lastMoveDir = Vector3.zero;
+    private Vector3 lastMoveDir = Vector3.zero;
     private float snapBackOffset = 0.15f;
     private float speed = 5f;
     private Vector3 movement;
+    private Animator anim;
+    private Vector3 lastDirection = new Vector3(0, 1, 0);
 
     public bool isSliding = false;
     private PlayerJump playerJump;
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     {
         col = GetComponent<Collider2D>();
         playerJump = GetComponent<PlayerJump>();
+        anim = GetComponent<Animator>();
     }
 
     void Start()
@@ -67,6 +70,15 @@ public class Player : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
 
         movement = new Vector3(x, y, 0).normalized;
+
+        if (movement != Vector3.zero)
+        {
+            lastDirection = movement;
+        }
+
+        anim.SetFloat("Horizontal", lastDirection.x);
+        anim.SetFloat("Vertical", lastDirection.y);
+        anim.SetFloat("Speed", movement.magnitude);
 
         bool isMoving = movement != Vector3.zero && !isSliding && !playerJump.IsJumping;
 
