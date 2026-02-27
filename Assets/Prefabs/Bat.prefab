@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7332552578850560457}
   - component: {fileID: -1868600283412546885}
   - component: {fileID: 7967568511673117459}
+  - component: {fileID: 4335321231473390286}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Enemy
@@ -108,10 +109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a37a08a462e37c4ca194b798692428c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bat
-  dir: 1
   speed: 5
+  chaseSpeed: 8
   batSound: {fileID: 8300000, guid: a7989149fb365274f93404e90efc2c36, type: 3}
-  soundRadius: 5
+  detectRadius: 5
+  Point1: {fileID: 0}
+  Point2: {fileID: 0}
 --- !u!61 &2202108743874710541
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,7 +145,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -304,3 +307,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &4335321231473390286
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547282592296370866}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

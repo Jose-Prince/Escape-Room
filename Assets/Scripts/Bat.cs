@@ -1,19 +1,36 @@
+using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Bat : MonoBehaviour
 {
     private Vector3 movement;
 
-    [SerializeField] int dir = 1;
-    [SerializeField] float speed = 5f;
+    [Header("Speeds")]
+    [SerializeField] float patrolSpeed = 5f;
+    [SerializeField] float dashSpeed = 10f;
 
     [Header("Sound")]
-    [SerializeField] private AudioClip batSound;
-    [SerializeField] private float soundRadius = 5f;
+    [SerializeField] AudioClip batSound;
 
-    private Transform player;
+    [Header("Detection")]
+    [SerializeField] float detectRadius = 2f;
+    [SerializeField] float dashDistance = 4f;
+
+    [Header("Waypoints")]
+    [SerializeField] Transform Point1;
+    [SerializeField] Transform Point2;
+
+    private Transform playerT;
     private AudioSource audioSource;
-    private bool playerInRange = false;
+
+    private NavMeshAgent agent;
+    private Transform currentTarget;
+
+    private bool isDashing = false;
+
+    private Vector3 dashDirection;
+    private float dashTravelled;
 
     void Awake()
     {
@@ -21,55 +38,81 @@ public class Bat : MonoBehaviour
         audioSource.clip = batSound;
         audioSource.loop = true;
         audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 1f; // Sonido 3D
+        audioSource.spatialBlend = 1f;
         audioSource.minDistance = 1f;
-        audioSource.maxDistance = soundRadius;
+        audioSource.maxDistance = detectRadius;
     }
 
     void Start()
     {
-        GameObject p = GameObject.FindGameObjectWithTag("Player");
-        if (p != null) player = p.transform;
+        playerT = GameObject.FindGameObjectWithTag("Player").transform;
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
+        currentTarget = Point1;
+        agent.speed = patrolSpeed;
+        agent.SetDestination(currentTarget.position);
     }
 
     void Update()
     {
-        movement = new Vector3(0, dir, 0).normalized;
-        CheckPlayerDistance();
-    }
+        float distance = Vector2.Distance(transform.position, playerT.position);
 
-    void FixedUpdate()
-    {
-        transform.position += movement * speed * Time.deltaTime;
-    }
-
-    void CheckPlayerDistance()
-    {
-        if (player == null) return;
-
-        float distance = Vector2.Distance(transform.position, player.position);
-
-        if (distance <= soundRadius)
+        if (!isDashing && distance <= detectRadius)
         {
-            if (!playerInRange)
-            {
-                playerInRange = true;
-                audioSource.Play();
-            }
+            StartDash();
         }
+
+        if (isDashing)
+            Dash();
+        else
+            Patrol();
+    }
+
+    void Patrol()
+    {
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            currentTarget = currentTarget == Point1 ? Point2 : Point1;
+            agent.SetDestination(currentTarget.position);
+        }
+    }
+
+    void StartDash()
+    {
+        isDashing = true;
+        agent.enabled = false;
+        dashDirection = (playerT.position - transform.position).normalized;
+        dashTravelled = 0f;
+
+        audioSource.Play();
+    }
+
+    void Dash()
+    {
+        float step = dashSpeed * Time.deltaTime;
+        transform.position += dashDirection * step;
+        dashTravelled += step;
+
+        if (dashTravelled >= dashDistance)
+            StopDash();
+    }
+
+    void StopDash()
+    {
+        float distance = Vector2.Distance(transform.position, playerT.position);
+
+        if (distance <= detectRadius)
+            StartDash();
         else
         {
-            if (playerInRange)
-            {
-                playerInRange = false;
-                audioSource.Stop();
-            }
-        }
-    }
+            isDashing = false;
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-            dir *= -1;
+            agent.enabled = true;
+            agent.speed = patrolSpeed;
+            agent.SetDestination(currentTarget.position);
+        }
     }
 }

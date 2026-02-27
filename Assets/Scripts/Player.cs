@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            transform.position = manager.GetCheckpointPosition();
+            
         }     
 
         if (collision.gameObject.CompareTag("Wall"))
