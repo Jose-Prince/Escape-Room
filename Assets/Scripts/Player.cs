@@ -185,6 +185,16 @@ public class Player : MonoBehaviour
             CheckpointManager manager = FindFirstObjectByType<CheckpointManager>();
             manager.SetCheckpoint(collision.transform.position);
         }
+
+        if (collision.CompareTag("Web"))
+        {
+            speed = 2f;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        speed = 5f;
     }
 
     void SnapToTileCenter(Tilemap tilemap)

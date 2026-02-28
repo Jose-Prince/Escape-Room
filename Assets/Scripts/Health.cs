@@ -1,16 +1,37 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] float totalHealth = 10f;
+    [SerializeField] Image healthBarFill;
+    private float actualHealth;
+
     void Start()
     {
-        
+        actualHealth =totalHealth;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            actualHealth -= 1;
+            UpdateHealthBar();
+        }     
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            actualHealth -= 1;
+            UpdateHealthBar();
+        }
+    }
+
+    void UpdateHealthBar()
+    {
+        healthBarFill.fillAmount = actualHealth / totalHealth;
     }
 }
